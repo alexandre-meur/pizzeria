@@ -1,5 +1,5 @@
 /**
- * TP5 Java objet
+ * TP6 Java objet
  * @author Alexandre Meur
  */
 

@@ -8,6 +8,7 @@ public class Pizza {
 	private String code;
 	private String libelle;
 	private double prix;
+	private CategoriePizza categorie;
 	
 	//Compteur
 	private static int compteur = 0;
@@ -18,10 +19,11 @@ public class Pizza {
 	 * @param libelle
 	 * @param prix
 	 */
-	public Pizza(String code, String libelle, double prix) {
+	public Pizza(String code, String libelle, double prix, CategoriePizza categorie) {
 		this.code = code;
 		this.libelle = libelle;
 		this.prix = prix;
+		this.categorie = categorie;
 		this.id = compteur;
 		compteur++;
 	}
@@ -33,10 +35,11 @@ public class Pizza {
 	 * @param libelle
 	 * @param prix
 	 */
-	public Pizza(int id, String code, String libelle, double prix) {
+	public Pizza(int id, String code, String libelle, double prix, CategoriePizza categorie) {
 		this.id = id;
 		this.code = code;
 		this.libelle = libelle;
+		this.categorie = categorie;
 		this.prix = prix;
 	}
 	
@@ -52,33 +55,21 @@ public class Pizza {
 	}
 	
 	/**
-	 * Surcharge de toString()
+	 * Redéfinition de toString()
 	 */
 	public String toString() {
 		DecimalFormat df = new DecimalFormat("0.00"); 
-		return code+" -> "+libelle+" ("+df.format(prix)+"€)";
+		return code+" -> "+libelle+" ("+df.format(prix)+"€) "+categorie.toString();
 	}
 	
-	/**
-	 * getter pour le code
-	 * @return attribut code
-	 */
 	public String getCode() {
 		return code;
 	}
 	
-	/**
-	 * getter pour le libelle
-	 * @return attribut libelle
-	 */
 	public String getLibelle() {
 		return libelle;
 	}
 	
-	/**
-	 * getter pour le prix
-	 * @return attribut prix
-	 */
 	public double getPrix() {
 		return prix;
 	}
@@ -94,6 +85,12 @@ public class Pizza {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
-	
-	
+
+	public CategoriePizza getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(CategoriePizza categorie) {
+		this.categorie = categorie;
+	}
 }
