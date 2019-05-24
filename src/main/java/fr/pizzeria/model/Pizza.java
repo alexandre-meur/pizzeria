@@ -6,26 +6,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 
+import javax.persistence.*;
+
 import fr.pizzeria.utils.*;
 
+@Entity
+@Table(name="pizzas")
 public class Pizza {
 	
-	@SuppressWarnings("unused")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
+	@Column(name="code", nullable=false)
 	@ToString(uppercase = true)
 	public String code;
+	
+	@Column(name="libelle", nullable=false)
 	@ToString(uppercase = false)
 	public String libelle;
+	
+	@Column(name="prix", nullable=false)
 	@ToString
 	@Rule(min=0)
 	public double prix;
+	
+	@Enumerated
+	@Column(name="categorie", nullable=false)
 	public CategoriePizza categorie;
 	
-	//Compteur
-	private static int compteur = 0;
+	public Pizza() {
+		super();
+	}
 	
 	/**
-	 * Constructeur sans id. l'id est géré avec un compteur
+	 * Constructeur
 	 * @param code
 	 * @param libelle
 	 * @param prix
@@ -35,8 +50,6 @@ public class Pizza {
 		this.libelle = libelle;
 		this.prix = prix;
 		this.categorie = categorie;
-		this.id = compteur;
-		compteur++;
 	}
 	
 	/**
@@ -79,7 +92,7 @@ public class Pizza {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Redéfinition d'equals
 	 * @param p pizza à comparer à this
@@ -157,4 +170,13 @@ public class Pizza {
 	public void setCategorie(CategoriePizza categorie) {
 		this.categorie = categorie;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 }

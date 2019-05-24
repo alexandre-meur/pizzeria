@@ -24,7 +24,7 @@ public class PizzeriaAdminConsoleApp {
 	public static void main(String[] args) throws PizzaException{
 		boolean quitte = false;
 		int choixUtilisateur = 0;
-		IPizzaDao dao = new PizzaMemDao();
+		IPizzaDao dao = new JPAPizzaDao();
 		MenuServiceFactory factory = new MenuServiceFactory();
 		MenuService service;
 		
