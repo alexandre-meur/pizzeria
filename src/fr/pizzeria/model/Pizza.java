@@ -1,14 +1,22 @@
 package fr.pizzeria.model;
 
+import java.text.DecimalFormat;
+
 public class Pizza {
-	int id;
-	String code;
-	String libelle;
-	double prix;
+	private int id;
+	private String code;
+	private String libelle;
+	private double prix;
 	
 	//Compteur
-	static int compteur = 0;
+	private static int compteur = 0;
 	
+	/**
+	 * Constructeur sans id. l'id est géré avec un compteur
+	 * @param code
+	 * @param libelle
+	 * @param prix
+	 */
 	public Pizza(String code, String libelle, double prix) {
 		this.code = code;
 		this.libelle = libelle;
@@ -17,6 +25,13 @@ public class Pizza {
 		compteur++;
 	}
 	
+	/**
+	 * Constructeur avec id fourni.
+	 * @param id
+	 * @param code
+	 * @param libelle
+	 * @param prix
+	 */
 	public Pizza(int id, String code, String libelle, double prix) {
 		this.id = id;
 		this.code = code;
@@ -24,5 +39,27 @@ public class Pizza {
 		this.prix = prix;
 	}
 	
+	/**
+	 * Surcharge de toString()
+	 */
+	public String toString() {
+		DecimalFormat df = new DecimalFormat("0.00"); 
+		return code+" -> "+libelle+" ("+df.format(prix)+"€)";
+	}
 	
+	public String getCode() {
+		return code;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getLibelle() {
+		return libelle;
+	}
+
+	public double getPrix() {
+		return prix;
+	}	
 }
