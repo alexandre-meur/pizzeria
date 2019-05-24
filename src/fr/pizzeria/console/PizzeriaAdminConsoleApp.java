@@ -1,3 +1,8 @@
+/**
+ * TP2 Java objet
+ * @author Alexandre Meur
+ */
+
 package fr.pizzeria.console;
 
 import java.util.Scanner;
@@ -33,6 +38,7 @@ public class PizzeriaAdminConsoleApp {
 				}
 			}
 			
+			//gestion du choix de l'utilisateur
 			switch(choixUtilisateur){
 			case 1:
 				System.out.println("Liste des pizzas");
@@ -56,7 +62,9 @@ public class PizzeriaAdminConsoleApp {
 		}
 	}
 	
-	/**Affiche le menu **/
+	/**
+	 * Affiche le menu
+	 */
 	public static void afficheMenu() {
 		System.out.println("***** Pizzeria Administration *****");
 		System.out.println("1. Lister les pizzas");
