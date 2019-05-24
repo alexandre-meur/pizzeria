@@ -19,12 +19,12 @@ public class PizzeriaAdminConsoleApp {
 	/**
 	 * Programme principal
 	 * @param args
-	 * @throws Exception Si le switch arrive au default (ne devrait pas arriver)
+	 * @throws PizzaException 
 	 */
-	public static void main(String[] args) throws PizzaException {
+	public static void main(String[] args) throws PizzaException{
 		boolean quitte = false;
 		int choixUtilisateur = 0;
-		PizzaMemDao dao = new PizzaMemDao();
+		IPizzaDao dao = new PizzaMemDao();
 		MenuServiceFactory factory = new MenuServiceFactory();
 		MenuService service;
 		
@@ -58,6 +58,7 @@ public class PizzeriaAdminConsoleApp {
 		System.out.println("2. Ajouter une nouvelle pizza");
 		System.out.println("3. Mettre à jour une pizza");
 		System.out.println("4. Supprimer une pizza");
+		System.out.println("5. Remettre la base de données à zéro");
 		System.out.println("99. Sortir");
 	}
 	
@@ -72,7 +73,7 @@ public class PizzeriaAdminConsoleApp {
 			if(input.hasNextInt()) {
 				choix = input.nextInt();
 				//Si l'entrée n'est pas bonne on demande une option valide
-				if(choix != 1 && choix != 2 && choix != 3 && choix != 4 && choix != 99) {
+				if(choix != 1 && choix != 2 && choix != 3 && choix != 4 && choix != 5 && choix != 99) {
 					System.out.println("Entrez une option valide");
 				}else {
 					inputOk = true;

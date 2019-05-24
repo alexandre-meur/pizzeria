@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.IPizzaDao;
 import fr.pizzeria.model.Pizza;
-import fr.pizzeria.model.PizzaMemDao;
 import fr.pizzeria.utils.Validator;
 
 public class ModifierPizzaService extends MenuService {
 
 	@Override
-	public void executeUC(Scanner input, PizzaMemDao dao) throws UpdatePizzaException {
+	public void executeUC(Scanner input, IPizzaDao dao) throws PizzaException {
 		Pizza pizzaInput;
 		String codeInput;
 		

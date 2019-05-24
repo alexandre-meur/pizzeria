@@ -18,4 +18,17 @@ public enum CategoriePizza {
 	public String toString() {
 		return getProp();
 	}
+	
+	public int toInt() {
+		switch(this) {
+		case VIANDE:
+			return 0;
+		case POISSON:
+			return 1;
+		case SANS_VIANDE:
+			return 2;
+		default:
+			return -1;
+		}
+	}
 }

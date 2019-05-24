@@ -12,7 +12,7 @@ public class StringUtils {
 		
 		for(Field f : fields) {
 			for(Annotation a : f.getAnnotations()) {
-				if(a instanceof fr.pizzeria.utils.ToString) {
+				if(a instanceof ToString) {
 					uppercase = ((ToString)a).uppercase();
 					if(uppercase) {
 						try {

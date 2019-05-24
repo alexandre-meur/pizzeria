@@ -10,7 +10,7 @@ import fr.pizzeria.utils.Validator;
 public class AjouterPizzaService extends MenuService {
 
 	@Override
-	public void executeUC(Scanner input, PizzaMemDao dao) throws SavePizzaException {
+	public void executeUC(Scanner input, IPizzaDao dao) throws PizzaException {
 		Pizza inputPizza;
 		
 		//Demande d'une nouvelle pizza

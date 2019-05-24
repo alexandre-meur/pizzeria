@@ -2,6 +2,8 @@ package fr.pizzeria.model;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 import fr.pizzeria.utils.*;
@@ -50,6 +52,32 @@ public class Pizza {
 		this.libelle = libelle;
 		this.categorie = categorie;
 		this.prix = prix;
+	}
+	
+	public Pizza(ResultSet data) {
+		
+		try {
+			id = data.getInt("id");
+			code = data.getString("code");
+			libelle = data.getString("libelle");
+			prix = data.getDouble("prix");
+		
+			switch(data.getInt("categorie")) {
+			case 0:
+				categorie = CategoriePizza.VIANDE;
+				break;
+			case 1:
+				categorie = CategoriePizza.SANS_VIANDE;
+				break;
+			case 2:
+				categorie = CategoriePizza.POISSON;
+				break;
+			default:
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

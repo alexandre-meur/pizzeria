@@ -3,17 +3,22 @@ package fr.pizzeria.service;
 import java.util.Scanner;
 
 import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.model.PizzaMemDao;
+import fr.pizzeria.exception.PizzaException;
+import fr.pizzeria.model.IPizzaDao;
 
 public class SupprimerPizzaService extends MenuService{
 
 	@Override
-	public void executeUC(Scanner input, PizzaMemDao dao) throws DeletePizzaException{
+	public void executeUC(Scanner input, IPizzaDao dao) throws PizzaException{
 		String codeInput;
 		ListerPizzasService listeService = new ListerPizzasService();
 		
 		//Listage des pizzas
-		listeService.executeUC(input, dao);
+		try {
+			listeService.executeUC(input, dao);
+		} catch (PizzaException e) {
+			throw new DeletePizzaException("Problème pendant l'affichage des pizzas avant la suppression.");
+		}
 		
 		//Demande le code de la pizza
 		System.out.println("Entrez le code de la pizza à supprimer : ");

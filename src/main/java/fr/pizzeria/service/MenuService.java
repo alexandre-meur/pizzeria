@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.model.CategoriePizza;
+import fr.pizzeria.model.IPizzaDao;
 import fr.pizzeria.model.Pizza;
-import fr.pizzeria.model.PizzaMemDao;
 
 public abstract class MenuService {
-	public abstract void executeUC(Scanner input, PizzaMemDao dao) throws PizzaException;
+	public abstract void executeUC(Scanner input, IPizzaDao dao) throws PizzaException;
 	
 	/**
 	 * Demande une nouvelle pizza à l'utilisateur

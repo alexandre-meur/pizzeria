@@ -15,7 +15,7 @@ public class Validator {
 			//f.setAccessible(true);
 			for(Annotation a : f.getAnnotations()) {
 				//Si c'est une annotation Rule, on vérifie que la regle est respéctée
-				if(a instanceof Rule && ((Rule)a).min() > (double)f.get(myObject)) {
+				if(a instanceof Rule && ((Rule)a).min() > f.getDouble(myObject)) {
 					throw new PizzaException("Sous la valeur minimum");
 				}
 			}
