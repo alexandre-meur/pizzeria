@@ -34,11 +34,7 @@ public class PizzaMemDao implements IPizzaDao {
 	 * @param la pizza à ajouter
 	 */
 	public void saveNewPizza(Pizza pizza) {
-		//On vérifie si le code pizza est libre
-		if(!pizzaExists(pizza.getCode())) {
-			//Ajout de la pizza
 			listPizza.add(pizza);
-		}	
 	}
 
 	/**
@@ -46,17 +42,17 @@ public class PizzaMemDao implements IPizzaDao {
 	 * @param Le code recherché
 	 * @Param La nouvelle pizza
 	 */
-	public void updatePizza(String codePizza, Pizza pizza) {
+	public void updatePizza(String oldCode, Pizza newPizza) {
 		Pizza oldPizza;
 		
 		//Recherche de la pizza
-		oldPizza = findPizzaByCode(codePizza);
+		oldPizza = findPizzaByCode(oldCode);
 		
 		//Si la pizza existe, on la met à jour
 		if(oldPizza != null) {
-			oldPizza.setCode(pizza.getCode());
-			oldPizza.setLibelle(pizza.getLibelle());
-			oldPizza.setPrix(pizza.getPrix());
+			oldPizza.setCode(newPizza.getCode());
+			oldPizza.setLibelle(newPizza.getLibelle());
+			oldPizza.setPrix(newPizza.getPrix());
 		}
 	}
 
@@ -65,7 +61,16 @@ public class PizzaMemDao implements IPizzaDao {
 	 * @param Le code recherché
 	 */
 	public void deletePizza(String codePizza) {
-		listPizza.remove(findPizzaByCode(codePizza));
+		Iterator<Pizza> iterator = listPizza.iterator();
+		Pizza pizza;
+		
+		while(iterator.hasNext()) {
+			pizza = iterator.next();
+			if(pizza.getCode().equals(codePizza)) {
+				iterator.remove();
+				return;
+			}
+		}
 	}
 
 	/**

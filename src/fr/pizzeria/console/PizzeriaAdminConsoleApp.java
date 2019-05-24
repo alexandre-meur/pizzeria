@@ -1,11 +1,13 @@
 /**
- * TP4 Java objet
+ * TP5 Java objet
  * @author Alexandre Meur
  */
 
 package fr.pizzeria.console;
 
 import java.util.Scanner;
+
+import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.model.*;
 import fr.pizzeria.service.MenuService;
 import fr.pizzeria.service.MenuServiceFactory;
@@ -19,7 +21,7 @@ public class PizzeriaAdminConsoleApp {
 	 * @param args
 	 * @throws Exception Si le switch arrive au default (ne devrait pas arriver)
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws PizzaException {
 		boolean quitte = false;
 		int choixUtilisateur = 0;
 		PizzaMemDao dao = new PizzaMemDao();
@@ -35,7 +37,11 @@ public class PizzeriaAdminConsoleApp {
 			//Lancement du service correspondant
 			service = factory.serviceFactory(choixUtilisateur);
 			if(service != null) {
-				service.executeUC(input, dao);
+				try {
+					service.executeUC(input, dao);
+				}catch(PizzaException pizzaException) {
+					System.out.println(pizzaException.getMessage());
+				}
 			}else {
 				System.out.println("Au revoir :(");
 				quitte = true;
