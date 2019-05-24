@@ -1,14 +1,23 @@
 package fr.pizzeria.model;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 
+import fr.pizzeria.utils.*;
+
 public class Pizza {
+	
 	@SuppressWarnings("unused")
 	private int id;
-	private String code;
-	private String libelle;
-	private double prix;
-	private CategoriePizza categorie;
+	@ToString(uppercase = true)
+	public String code;
+	@ToString(uppercase = false)
+	public String libelle;
+	@ToString
+	@Rule(min=0)
+	public double prix;
+	public CategoriePizza categorie;
 	
 	//Compteur
 	private static int compteur = 0;
@@ -49,17 +58,44 @@ public class Pizza {
 	 * @return true si les pizzas sont égales, false sinon
 	 */
 	public boolean equals(Pizza p) {
-		return 	this.getCode().equals(p.getCode()) &&
+		return 	this.getCode().equals(p.getCode());/* &&
 				this.getLibelle().equals(p.getLibelle()) &&
-				this.getPrix() == (p.getPrix());
+				this.getPrix() == (p.getPrix());*/
+	}
+	
+	public boolean compareCode(String code) {
+		return this.getCode().equals(code);
 	}
 	
 	/**
 	 * Redéfinition de toString()
 	 */
 	public String toString() {
-		DecimalFormat df = new DecimalFormat("0.00"); 
-		return code+" -> "+libelle+" ("+df.format(prix)+"€) "+categorie.toString();
+		//Passage en majuscule des champs annotés
+		StringUtils.util(this);
+		String result = "";
+		Object fieldValue = new Object();
+		DecimalFormat df = new DecimalFormat("0.00");
+		
+		for(Field f : this.getClass().getFields()) {
+			for(Annotation a : f.getAnnotations()) {
+				//On affiche que les attributs annotés par @ToString
+				if(a instanceof ToString) {
+					try {
+						fieldValue = f.get(this);
+					} catch (IllegalArgumentException | IllegalAccessException e) {
+						System.out.println("Problème dans Pizza.toString()");
+					}
+					//Mise en forme du prix si la valeur de l'attribut est de type double
+					if(fieldValue instanceof Double) {
+						result = result + '(' + df.format((Double) fieldValue).toString()+"€) " ;
+					}else {
+						result = result + fieldValue.toString()+" ";
+					}
+				}
+			}
+		}
+		return result;
 	}
 	
 	public String getCode() {

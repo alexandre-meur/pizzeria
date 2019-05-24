@@ -32,9 +32,10 @@ public class PizzaMemDao implements IPizzaDao {
 	/**
 	 * Ajout d'une pizza
 	 * @param la pizza à ajouter
+	 * @throws Exception 
 	 */
 	public void saveNewPizza(Pizza pizza) {
-			listPizza.add(pizza);
+		listPizza.add(pizza);
 	}
 
 	/**
@@ -61,14 +62,15 @@ public class PizzaMemDao implements IPizzaDao {
 	 * @param Le code recherché
 	 */
 	public void deletePizza(String codePizza) {
-		Iterator<Pizza> iterator = listPizza.iterator();
-		Pizza pizza;
+		Iterator<Pizza> it = listPizza.iterator();
+		Pizza p;
+		boolean continueRecherche = true;
 		
-		while(iterator.hasNext()) {
-			pizza = iterator.next();
-			if(pizza.getCode().equals(codePizza)) {
-				iterator.remove();
-				return;
+		while(it.hasNext() && continueRecherche) {
+			p = it.next();
+			if(p.compareCode(codePizza)) {
+				it.remove();
+				continueRecherche = false;
 			}
 		}
 	}
@@ -79,12 +81,12 @@ public class PizzaMemDao implements IPizzaDao {
 	 * @return La pizza si elle est trouvée ou null si on ne trouve rien
 	 */
 	public Pizza findPizzaByCode(String codePizza) {
-		Iterator<Pizza> iterator = listPizza.iterator();
+		Iterator<Pizza> it = listPizza.iterator();
 		Pizza pizza;
 		
-		while(iterator.hasNext()) {
-			pizza = iterator.next();
-			if(pizza.getCode().equals(codePizza)) {
+		while(it.hasNext()) {
+			pizza = it.next();
+			if(pizza.compareCode(codePizza)) {
 				return pizza;
 			}
 		}
@@ -98,12 +100,12 @@ public class PizzaMemDao implements IPizzaDao {
 	 * @return true si la pizza existe, false sinon
 	 */
 	public boolean pizzaExists(String codePizza) {
-		Iterator<Pizza> iterator = listPizza.iterator();
+		Iterator<Pizza> it = listPizza.iterator();
 		Pizza pizza;
 		
-		while(iterator.hasNext()) {
-			pizza = iterator.next();
-			if(pizza.getCode().equals(codePizza)) {
+		while(it.hasNext()) {
+			pizza = it.next();
+			if(pizza.compareCode(codePizza)) {
 				return true;
 			}
 		}
@@ -111,12 +113,14 @@ public class PizzaMemDao implements IPizzaDao {
 		return false;
 	}
 
+	/**
+	 * Redéfinition de toString
+	 * @return une String représentant la liste de pizza
+	 */
 	public String toString() {
 		String result = "";
-		Iterator<Pizza> iterator = listPizza.iterator();
-		
-		while(iterator.hasNext()) {
-			result = result + iterator.next().toString() + '\n';
+		for(Pizza p : listPizza) {
+			result = result + p.toString() + '\n';
 		}
 		
 		return result;

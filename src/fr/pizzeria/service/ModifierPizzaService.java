@@ -2,9 +2,11 @@ package fr.pizzeria.service;
 
 import java.util.Scanner;
 
+import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.model.PizzaMemDao;
+import fr.pizzeria.utils.Validator;
 
 public class ModifierPizzaService extends MenuService {
 
@@ -26,6 +28,15 @@ public class ModifierPizzaService extends MenuService {
 		//Demande la nouvelle pizza
 		System.out.println("Entrez la nouvelle pizza");
 		pizzaInput = demandePizza(input);
+		
+		//Check de la pizza
+		try {
+			Validator.check(pizzaInput);
+		}catch(PizzaException e) {
+			throw new UpdatePizzaException(e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		//Maj
 		dao.updatePizza(codeInput, pizzaInput);
