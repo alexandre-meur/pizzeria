@@ -1,8 +1,6 @@
 package fr.pizzeria.model;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -118,6 +116,7 @@ public class PizzaMemDaoTest {
 		Assert.assertTrue(16.52 == dao.findPizzaByCode("FRO").getPrix());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testUpdatePizza2() {
 		PizzaMemDao dao = new PizzaMemDao();
