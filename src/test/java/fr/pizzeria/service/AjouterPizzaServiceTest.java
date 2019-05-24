@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import fr.pizzeria.exception.PizzaException;
-import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.IPizzaDao;
 import fr.pizzeria.model.PizzaMemDao;
 
