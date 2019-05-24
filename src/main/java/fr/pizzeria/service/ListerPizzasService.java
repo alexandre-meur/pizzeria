@@ -11,7 +11,7 @@ public class ListerPizzasService extends MenuService {
 	 * Affiche les pizzas
 	 */
 	@Override
-	public void executeUC(Scanner input, IPizzaDao dao) throws PizzaException {
+	public void executeUC(Scanner input, IPizzaDao dao) throws PizzaException{
 		System.out.println("Liste des pizzas");
 		System.out.println(dao.toString());
 	}

@@ -13,12 +13,7 @@ public class SupprimerPizzaService extends MenuService{
 		String codeInput;
 		ListerPizzasService listeService = new ListerPizzasService();
 		
-		//Listage des pizzas
-		try {
-			listeService.executeUC(input, dao);
-		} catch (PizzaException e) {
-			throw new DeletePizzaException("Problème pendant l'affichage des pizzas avant la suppression.");
-		}
+		listeService.executeUC(input, dao);
 		
 		//Demande le code de la pizza
 		System.out.println("Entrez le code de la pizza à supprimer : ");

@@ -3,13 +3,11 @@ package fr.pizzeria.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.pizzeria.exception.PizzaException;
-
 public class PizzaMemDao implements IPizzaDao {
 	
 	private static ArrayList<Pizza> listPizza;
 	
-	public PizzaMemDao() throws PizzaException {
+	public PizzaMemDao() {
 		listPizza = new ArrayList<Pizza>();
 		
 		//Ajouts des pizzas
@@ -30,7 +28,10 @@ public class PizzaMemDao implements IPizzaDao {
 	 * @throws Exception 
 	 */
 	public void saveNewPizza(Pizza pizza) {
-		listPizza.add(pizza);
+		if(pizza != null) {
+			//Si la pizza n'existe pas déjà on l'ajoute
+			if(!pizzaExists(pizza.getCode())) listPizza.add(pizza);
+		}
 	}
 
 	/**
@@ -45,7 +46,7 @@ public class PizzaMemDao implements IPizzaDao {
 		oldPizza = findPizzaByCode(oldCode);
 		
 		//Si la pizza existe, on la met à jour
-		if(oldPizza != null) {
+		if(oldPizza != null && newPizza != null) {
 			oldPizza.setCode(newPizza.getCode());
 			oldPizza.setLibelle(newPizza.getLibelle());
 			oldPizza.setPrix(newPizza.getPrix());

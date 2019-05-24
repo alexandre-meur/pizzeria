@@ -98,14 +98,19 @@ public class Pizza {
 	 * @param p pizza à comparer à this
 	 * @return true si les pizzas sont égales, false sinon
 	 */
-	public boolean equals(Pizza p) {
-		return 	this.getCode().equals(p.getCode());/* &&
+	@Override
+	public boolean equals(Object o) {
+		if(!(o instanceof Pizza)) return false;
+		Pizza p = (Pizza) o;
+		return 	this.getCode().equals(p.getCode()) &&
 				this.getLibelle().equals(p.getLibelle()) &&
-				this.getPrix() == (p.getPrix());*/
+				this.getPrix() == p.getPrix() &&
+				this.getCategorie() == p.getCategorie();
 	}
 	
 	public boolean compareCode(String code) {
-		return this.getCode().equals(code);
+		if(code == null) return false;
+		return this.getCode().equals(code.toUpperCase());
 	}
 	
 	/**
